@@ -1,7 +1,9 @@
-from os import terminal_size
-
+'''
+Run Amethyst
+'''
 
 '''
+Mac commands:
 command + t: create a new tab in terminal/chrome
 '''
 
