@@ -24,15 +24,15 @@ root
  |    |-- key: string
  |    |-- value: string (valueContainsNull = true)
 
-+----------+--------------+--------------------+
-|      name|knownLanguages|          properties|
-+----------+--------------+--------------------+
-|     James| [Java, Scala]|[eye -> brown, ha...|
-|   Michael|[Spark, Java,]|[eye ->, hair -> ...|
-|    Robert|    [CSharp, ]|[eye -> , hair ->...|
-|Washington|          null|                null|
-| Jefferson|        [1, 2]|                  []|
-+----------+--------------+--------------------+
++----------+--------------+----------------------------+
+|      name|knownLanguages|          properties        |
++----------+--------------+----------------------------+
+|     James| [Java, Scala]|[eye -> brown, hair -> black|
+|   Michael|[Spark, Java,]|[eye ->, hair -> brown      |
+|    Robert|    [CSharp, ]|[eye -> , hair -> red       |
+|Washington|          null|                null        |
+| Jefferson|        [1, 2]|                  []        |
++----------+--------------+----------------------------+
 
 '''
 PySpark function explode(e: Column) is used to explode or create array or map columns to rows. 
@@ -86,3 +86,17 @@ root
 | Robert| eye|     |
 | Robert|hair|  red|
 +-------+----+-----+
+
+##################################################################
+
+'''
+Change query level to token level:
+session, keywords, qba_browse_scores
+'''
+tommy_qu.select(
+    "*",
+    split(col("keywords"), " ").alias("tokens")
+).select(
+    "*",
+    explode("tokens").alias("token")
+).drop("tokens")

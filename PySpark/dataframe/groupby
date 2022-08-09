@@ -1,0 +1,3 @@
+
+token_pairs_src = token_pairs_counts.groupBy("src_token").agg(sum("count").alias("src_count"))
+probabilities = token_pairs_counts.join(token_pairs_src, "src_token", "inner")
