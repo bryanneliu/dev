@@ -52,5 +52,31 @@ rstrip
 
 ################################################################################
 '''
-
+PySpark lit() function is used to add constant or literal value as a new column to the DataFrame.
 '''
+from pyspark.sql.functions import col,lit
+df2 = df.select(col("EmpId"),col("Salary"),lit("1").alias("lit_value1"))
+df2.show(truncate=False)
+
++-----+------+----------+
+|EmpId|Salary|lit_value1|
++-----+------+----------+
+|  111| 50000|         1|
+|  222| 60000|         1|
+|  333| 40000|         1|
++-----+------+----------+
+
+# Use pyspark lit() function using withColumn to derive a new column based on some conditions.
+from pyspark.sql.functions import when, lit, col
+df3 = df2.withColumn("lit_value2", when(col("Salary") >=40000 & col("Salary") <= 50000,lit("100")).otherwise(lit("200")))
+df3.show(truncate=False)
+
++-----+------+----------+----------+
+|EmpId|Salary|lit_value1|lit_value2|
++-----+------+----------+----------+
+|  111| 50000|         1|       100|
+|  222| 60000|         1|       200|
+|  333| 40000|         1|       100|
++-----+------+----------+----------+
+
+################################################################################
