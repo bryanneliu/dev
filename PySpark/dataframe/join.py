@@ -266,3 +266,25 @@ df1.join(df2,df1.id1 == df2.id2,"inner") \
    .join(df3,df1.id1 == df3.id3,"inner")
 
 ###############################################################################################
+'''
+crossJoin: Returns the cartesian product with another DataFrame.
+'''
+df.select("age", "name").collect()
+[Row(age=2, name='Alice'), Row(age=5, name='Bob')]
+
+df2.select("name", "height").collect()
+[Row(name='Tom', height=80), Row(name='Bob', height=85)]
+
+df.crossJoin(df2.select("height")).select("age", "name", "height").collect()
+[Row(age=2, name='Alice', height=80), Row(age=2, name='Alice', height=85),
+ Row(age=5, name='Bob', height=80), Row(age=5, name='Bob', height=85)]
+
+age, name     name,height    height
+ 2, Alice      Tom, 80        80
+ 5, Bob        Bob, 85        85
+
+ age, name, height
+ 2,   Alice, 80
+ 2,   Alice, 85
+ 5,   Bob,   80
+ 5,   Bob,   85

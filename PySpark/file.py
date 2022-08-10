@@ -24,6 +24,29 @@ cap = spark.read.csv(
 )
 ########################################################################
 
+synonyms = spark.read.parquet(args.input)
+
+synonyms_blocklist = spark.read.csv(
+    "s3://synonym-expansion/data/blocklists/synonyms_blocklist.txt",
+    schema=StructType([
+        StructField("src", StringType()),
+        StructField("dest", StringType())
+    ]),
+    sep="\t"
+)
+synonyms = synonyms.join(
+    synonyms_blocklist,
+    ["src", "dest"],
+    "left_anti"
+)
+
+synonyms = synonyms.select(
+    "*",
+    lit("candidates").alias("source")
+)
+
+synonyms.cache()
+
 '''
 write CSV
 '''
