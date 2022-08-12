@@ -8,7 +8,6 @@ synonyms = spark.read.csv(
 )
 synonyms = spark.read.csv(args.input, header=True, sep="\t", quote="")
 ########################################################################
-
 schema_cap = StructType([
     StructField("asin", StringType()),
     StructField("marketplace_id", IntegerType()),
@@ -23,7 +22,6 @@ cap = spark.read.csv(
     sep="\t",
 )
 ########################################################################
-
 synonyms = spark.read.parquet(args.input)
 
 synonyms_blocklist = spark.read.csv(
