@@ -40,7 +40,7 @@ root
  |-- state: string (nullable = true)
  |-- gender: string (nullable = true)
 
- +----------------------+------------------+-----+------+
++----------------------+------------------+-----+------+
 |name                  |languages         |state|gender|
 +----------------------+------------------+-----+------+
 |[James, , Smith]      |[Java, Scala, C++]|OH   |M     |
