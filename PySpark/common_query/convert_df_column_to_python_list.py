@@ -19,6 +19,7 @@ dataframe.select('student Name').rdd.map(lambda x : x[0]).collect()
 collect()
 '''
 [data[0] for data in dataframe.select(‘column_name’).collect()]
+query_freq_list = [data[0] for data in query_freq.select("freq").collect()]
 
 '''
 toPandas()
