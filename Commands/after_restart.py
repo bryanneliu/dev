@@ -5,7 +5,7 @@ Connect to Cisco
 '''
 Connect to Terminal:
 command + t: create a new tab in terminal/chrome
-1. Run caffeinate to stop the screen being locked: lbryanne@88665a371696 ~ % caffeinate
+1. Run caffeinate to stop the screen being locked: lbryanne@88665a371696 ~ % caffeinate -d
 2. kinit & mwinit -o (authenticate)
 3. Locate to git repository: cd /Users/lbryanne/Desktop/Project/dev
 '''
