@@ -1,0 +1,1 @@
+df.select("name.firstname","name.lastname")

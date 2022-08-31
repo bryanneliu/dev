@@ -41,3 +41,16 @@ aws emr add-steps --cluster-id j-Y3PFMOQDFU4 --region us-east-1 --steps Type=CUS
 
 aws emr add-steps --cluster-id j-Y3PFMOQDFU4 --region us-east-1 --steps Type=CUSTOM_JAR,Name="get_search_config_synonyms_statistics",ActionOnFailure=CONTINUE,Jar=command-runner.jar,Args=["spark-submit","--master","yarn","--py-files","s3://spear-team/lbryanne/synonyms/src/commons.zip","s3://spear-team/lbryanne/synonyms/src/synonyms_from_A9/get_search_config_synonyms_statistics.py"] --profile lbryanne
 
+
+
+
+
+An error was encountered:
+Invalid status code '500' from http://localhost:8998/sessions/0/statements with error payload: "java.lang.IllegalStateException: RPC channel is closed."
+
+its hard to debug the underlying cause from this message, it could be caused by a bad emr setup
+I suggest to ssh into the master node and first run this:
+for x in $(yarn application -list -appStates RUNNING | awk 'NR > 2 { print $1 }'); do yarn application -kill $x; done;
+The after your applications are all killed, open a pyspark terminal and see if a simple spark query gives you the same results.
+
+
